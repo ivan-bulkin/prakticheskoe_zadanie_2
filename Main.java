@@ -130,6 +130,7 @@ public class Main {
         System.out.println("]");
         System.out.println("Сейчас, с помощью цикла и условия мы заменим в массиве 0 на 1, а 1 на 0.");
         for (int i = 0; i < massiv_int.length; i++) {
+//            massiv_int[i] = (massiv_int[i]==0 ? 1:0); - а можно было сделать и так в одну строчку
             if (massiv_int[i] == 0) {
                 massiv_int[i] = 1;
             } else if (massiv_int[i] == 1) {
@@ -207,8 +208,10 @@ public class Main {
             System.out.println(" ]");
         }
         System.out.println("Теперь диагональные элементы массива, размером " + kol_vo_strok_stolbtsov + "х" + kol_vo_strok_stolbtsov + " мы заполним единицами:");
+        int lastIndex = massiv_int.length - 1;
         for (int i = 0; i < kol_vo_strok_stolbtsov; i++) {
-            massiv_int[i][i] = 1;
+//            massiv_int[i][i] = 1;
+            massiv_int[i][i] = massiv_int[i][lastIndex - i] = 1;
         }
         for (int i = 0; i < massiv_int.length; i++) {
             System.out.printf("[");
@@ -252,6 +255,8 @@ public class Main {
         System.out.println("А вот и ответ: минимальный элемент: 0, максимальный элемент: " + kol_vo_strok_strok);
         System.out.println("А заодно мы вычислили минимальное значение из всех элементов массива: " + min_znachenie + " и максимальное значение: " + max_znachenie);
         System.out.println("И да, это всё было сделано без помощи интернета.");
+//        Array .sort(massiv_int); - можно отсортировать массив и выбрать из него первый и последний элемент
+//       а также есть математическая функция, которая выбирает из массива максимальный и минимальный элемент
     }
 
     //6. Написать метод, в который передается не пустой одномерный целочисленный массив, метод должен вернуть true, если в массиве есть место, в котором сумма левой и правой части массива равны. Примеры: checkBalance([2, 2, 2, 1, 2, 2, || 10, 1]) → true, checkBalance([1, 1, 1, || 2, 1]) → true, граница показана символами ||, эти символы в массив не входят.
@@ -308,6 +313,8 @@ public class Main {
         }
         return levo_pravo_ravno;//Пока я не разобрался, как метод возвращает значение. В метод могу передавать значения, а из метода наружу нет
 //        System.out.println("levaya_chast " + levaya_chast + " nomer_elementa_massiva " + nomer_elementa_massiva);
+// а что, если точек, где левая и правая совпадают несколько? это может быть, если в массиве есть нули, то тогда надо выводить несколько вариантов
+// также, если сумма всех чисел не делится на 2, то и не будет правильного рещения, т.е. можно сразу сделать проверку на этот момент
     }
 
     //7. Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным), при этом метод должен сместить все элементы массива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами.
@@ -345,7 +352,7 @@ public class Main {
             for (int i = 0; i < na_skolko_elementov_smestit; i++) {
                 element_massiva = massiv_int[massiv_int.length - 1];
                 for (int j = massiv_int.length - 2; j > -1; j--) {
-                    massiv_int[j+1] = massiv_int[j];
+                    massiv_int[j + 1] = massiv_int[j];
                 }
                 massiv_int[0] = element_massiva;
             }
